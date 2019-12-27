@@ -13,6 +13,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('App\Repositores\NotaFiscalRepositoryInterface', 'App\Repositores\NotaFiscalRespositoyEloquent');
     }
 }
