@@ -17,6 +17,7 @@ class NotaFiscalService
 
     public function save()
     {
+        //implementation
     }
 
     public function getAll()
