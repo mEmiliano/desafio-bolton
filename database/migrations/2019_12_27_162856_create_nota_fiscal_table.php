@@ -15,7 +15,7 @@ class CreateNotaFiscalTable extends Migration
     {
         Schema::create('nota_fiscal', function (Blueprint $table) {
             $table->tinyIncrements('id');
-            $table->string('chave_acesso',44);
+            $table->string('chave_acesso');
             $table->float('valor_total_nota', 10, 2);
             $table->timestamps();
         });
