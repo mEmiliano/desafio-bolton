@@ -14,3 +14,7 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->post('nota-fiscal/salvar', 'NotaFiscalController@salvarNotasFiscais');
+$router->get('nota-fiscal', 'NotaFiscalController@listarNotasFiscais');
+$router->get('nota-fiscal/{chave-acesso}', 'NotaFiscalController@listarPorChave');

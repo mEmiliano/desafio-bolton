@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\NotaFiscalService;
+use Illuminate\Http\Response;
 
 class NotaFiscalController
 {
@@ -15,68 +16,63 @@ class NotaFiscalController
 
     /**
      * @OA\Post(
-     *     path="/nfe/receive",
-     *     operationId="/nfe/receive",
-     *     tags={"NFe - Receive"},
+     *     path="/nota-fiscal/salvar",
+     *     operationId="/nota-fiscal/salvar",
+     *     tags={"Nota Fiscal"},
      *     @OA\Response(
      *         response="204",
-     *         description="All NFes were successfully imported"
-     *     ),
-     *     @OA\Response(
-     *         response="500",
-     *         description="One of ArquiveiApi environment variables is missing."
+     *         description="Notas fiscais com sucesso"
      *     ),
      *     @OA\Response(
      *         response="400",
-     *         description="Something went wrong on ApiClientArquivei."
+     *         description="Erro com o cliente"
      *     ),
      *     @OA\Response(
      *         response="422",
-     *         description="Something went wrong when trying to parse the structure. Something went wrong when trying to save Electronic Invoice."
+     *         description="Erro ao tentar converter alguma estrutura ou algo em salvar alguma nota fiscal"
+     *     ),
+     *     @OA\Response(
+     *         response="500",
+     *         description="Erro com o servidor"
      *     ),
      * )
-     * @return Response|ResponseFactory
-     * @throws ApiClientArquiveiEnvironmentVariableMissingException
-     * @throws ApiClientArquiveiException
-     * @throws ApiClientArquiveiResponseStructureException
-     * @throws ElectronicInvoiceSaveResponseException
      */
     public function salvarNotasFiscais()
     {
-        return $this->notaFiscalService->save();
+        $this->notaFiscalService->save();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 
     /**
      * @OA\Get(
-     *     path="/nfe",
-     *     operationId="/nfe",
-     *     tags={"NFe - List"},
+     *     path="/nota-fiscal",
+     *     operationId="/nota-fiscal",
+     *     tags={"Nota Fiscal - Listar Keys"},
      *     @OA\Response(
      *         response="200",
-     *         description="Retrieves the imported keys"
+     *         description="Sucesso na buscas pelas keys"
      *     ),
      *     @OA\Response(
      *         response="500",
-     *         description="Something went wrong when trying to parse Electronic Invoice list."
+     *         description="Algo deu errado na busca das keys"
      *     ),
      * )
-     * @return Response|ResponseFactory
-     * @throws ElectronicInvoiceListsException
      */
-    public function buscarNotasFiscais()
+    public function listarNotasFiscais()
     {
         return $this->notaFiscalService->getAll();
     }
 
     /**
      * @OA\Get(
-     *     path="/nfe/{key}",
-     *     operationId="/nfe/key",
-     *     tags={"NFe - Show"},
+     *     path="/nota-fiscal/{chave-acesso}",
+     *     operationId="/nota-fiscal/{chave-acesso}",
+     *     tags={"Nota Fiscal - Buscar por chave de acesso"},
      *     @OA\Parameter(
-     *         name="key",
+     *         name="chave-acesso",
      *         in="path",
-     *         description="Imported key",
+     *         description="chave-acesso",
      *         required=true,
      *         @OA\Schema(type="string")
      *     ),
@@ -89,12 +85,11 @@ class NotaFiscalController
      *         description="Something went wrong when trying to to get an specific Electronic Invoice Response by a given key."
      *     ),
      * )
-     * @param $key
-     * @return JsonResponse
-     * @throws ElectronicInvoiceShowException
+     * @param $chaveAcesso
      */
-    public function buscarNotaFiscal($chaveAcesso)
+    public function listarPorChave($chaveAcesso)
     {
-        return $this->notaFiscalService->get($chaveAcesso);
+        $response =  $this->notaFiscalService->get($chaveAcesso);
+        return response()->json($response->toArray());
     }
 }

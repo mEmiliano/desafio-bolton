@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class NotaFiscal extends Model
 {
-    protected $table = 'notafiscal';
+    protected $table = 'nota_fiscal';
 }

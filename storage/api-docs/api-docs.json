@@ -1,0 +1,78 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Desafio Bolton API",
+        "contact": {
+            "name": "Marcelo Emiliano",
+            "email": "celoemiliano@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/nota-fiscal/salvar": {
+            "post": {
+                "tags": [
+                    "Nota Fiscal"
+                ],
+                "operationId": "/nota-fiscal/salvar",
+                "responses": {
+                    "204": {
+                        "description": "Notas fiscais com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro com o cliente"
+                    },
+                    "422": {
+                        "description": "Erro ao tentar converter alguma estrutura ou algo em salvar alguma nota fiscal"
+                    },
+                    "500": {
+                        "description": "Erro com o servidor"
+                    }
+                }
+            }
+        },
+        "/nota-fiscal": {
+            "get": {
+                "tags": [
+                    "Nota Fiscal - Listar Keys"
+                ],
+                "operationId": "/nota-fiscal",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso na buscas pelas keys"
+                    },
+                    "500": {
+                        "description": "Algo deu errado na busca das keys"
+                    }
+                }
+            }
+        },
+        "/nota-fiscal/{chave-acesso}": {
+            "get": {
+                "tags": [
+                    "Nota Fiscal - Buscar por chave de acesso"
+                ],
+                "operationId": "/nota-fiscal/{chave-acesso}",
+                "parameters": [
+                    {
+                        "name": "chave-acesso",
+                        "in": "path",
+                        "description": "chave-acesso",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retrieves the imported keys"
+                    },
+                    "500": {
+                        "description": "Something went wrong when trying to to get an specific Electronic Invoice Response by a given key."
+                    }
+                }
+            }
+        }
+    }
+}
