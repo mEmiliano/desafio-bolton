@@ -78,11 +78,11 @@ class NotaFiscalController
      *     ),
      *     @OA\Response(
      *         response="200",
-     *         description="Retrieves the imported keys"
+     *         description="Sucesso na busca da key"
      *     ),
      *     @OA\Response(
      *         response="500",
-     *         description="Something went wrong when trying to to get an specific Electronic Invoice Response by a given key."
+     *         description="Algo deu errado ou a key passada não é válida"
      *     ),
      * )
      * @param $chaveAcesso
