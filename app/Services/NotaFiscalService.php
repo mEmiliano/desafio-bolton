@@ -6,8 +6,6 @@ use App\ApiClient;
 use App\Models\NotaFiscal;
 use App\Repositores\NotaFiscalRepositoryInterface;
 use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
-use mysql_xdevapi\Exception;
 use Nathanmac\Utilities\Parser\Parser;
 
 class NotaFiscalService
